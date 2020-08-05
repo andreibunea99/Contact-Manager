@@ -14,6 +14,7 @@
 
     <button type="button" class="btn btn-outline-dark" onclick="window.location.href='/new-contact'" style="margin-bottom: 2%">New Contact</button>
 
+    <div style="margin-left: 5%; margin-right: 5%">
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -33,11 +34,14 @@
             <td th:text="${contact.getAddress()}"></td>
             <td th:text="${contact.getPhone()}"></td>
             <td>
-                <a href="/deleteContact" th:href="id=${contact.getId()}">Delete</a>
+<!--                <a href="@{/editContact(id=${contact.id})}">Edit</a>-->
+<!--                &nbsp;&nbsp;&nbsp;&nbsp;-->
+                <a th:href="@{/deleteContact(id=${contact.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
+    </div>
 </div>
 </body>
 </html>
