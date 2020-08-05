@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Contact Manager Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1 class="display-4" align="center" style="margin-bottom: 2%; margin-top: 1%">Contact Manager Application</h1>
+
+<div align="center">
+
+    <button type="button" class="btn btn-outline-dark" onclick="window.location.href='/new-contact'" style="margin-bottom: 2%">New Contact</button>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contact : ${contactList}">
+            <td th:text="${contact.getId()}"></td>
+            <td th:text="${contact.getName()}"></td>
+            <td th:text="${contact.getEmail()}"></td>
+            <td th:text="${contact.getAddress()}"></td>
+            <td th:text="${contact.getPhone()}"></td>
+            <td>
+<!--                <a href="/deleteContact" th:href="id=${contact.getId()}">Delete</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
