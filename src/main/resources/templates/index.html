@@ -34,8 +34,8 @@
             <td th:text="${contact.getAddress()}"></td>
             <td th:text="${contact.getPhone()}"></td>
             <td>
-<!--                <a href="@{/editContact(id=${contact.id})}">Edit</a>-->
-<!--                &nbsp;&nbsp;&nbsp;&nbsp;-->
+                <a th:href="@{/editContact(id=${contact.id})}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <a th:href="@{/deleteContact(id=${contact.id})}">Delete</a>
             </td>
         </tr>

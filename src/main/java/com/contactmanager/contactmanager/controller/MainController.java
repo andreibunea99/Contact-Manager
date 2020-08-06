@@ -58,14 +58,25 @@ public class MainController {
         return home(model);
     }
 
-    @RequestMapping(value = "/editContact", method = RequestMethod.GET)
+    @GetMapping(value = "/editContact")
     public ModelAndView editContact(HttpServletRequest request) {
         int contactId = Integer.parseInt(request.getParameter("id"));
         Contact contact = contactDAO.get(contactId);
-        ModelAndView model = new ModelAndView("ContactForm");
+        ModelAndView model = new ModelAndView("new-contact");
+        System.out.println(contact);
+//        int result = contactDAO.update(contact);
+        contactDAO.update(contact);
+        System.out.println(contact);
+        System.out.println("this guy up there");
         model.addObject("contact", contact);
 
         return model;
+    }
+
+    @PostMapping("/editContact")
+    public String editContact(@ModelAttribute Contact contact, Model model) {
+        contactDAO.update(contact);
+        return home(model);
     }
 
     @RequestMapping(value = "/deleteContact", method = RequestMethod.GET)

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class ContactDAOImpl implements ContactDAO{
@@ -22,6 +23,13 @@ public class ContactDAOImpl implements ContactDAO{
 
     @Override
     public int save(Contact contact) {
+
+        int maxIndex = jdbcTemplate.queryForObject("SELECT MAX(contact_id) FROM contact", int.class);
+        System.out.println(maxIndex);
+
+        jdbcTemplate.execute("ALTER TABLE `contact` AUTO_INCREMENT = " + maxIndex);
+//        ResultSet rs = jdbcTemplate.executeQuery("SELECT MAX(PHONE) FROM complaints");
+
         String sql = "insert into contact (name, email, address, phone) values (?, ?, ?, ?)";
 
         return jdbcTemplate.update(sql, contact.getName(), contact.getEmail(), contact.getAddress(), contact.getPhone());
@@ -29,10 +37,24 @@ public class ContactDAOImpl implements ContactDAO{
 
     @Override
     public int update(Contact contact) {
-        String sql = "update contact set name=?, email=?, address=?, phone=? where  contact_id=?";
+        System.out.println(contact);
+        String sql = "UPDATE contact SET name=?, email=?, address=?, "
+                + "phone=? WHERE contact_id=?";
 
-        return jdbcTemplate.update(sql, contact.getName(), contact.getEmail(), contact.getAddress(), contact.getPhone(),
-                contact.getId());
+        System.out.println(contact.getId());
+
+        int res = jdbcTemplate.update(sql, contact.getName(), contact.getEmail(),
+                contact.getAddress(), contact.getPhone(), contact.getId());
+
+        List<Contact> contactList = list();
+        for (Contact obj : contactList) {
+            System.out.println(obj);
+        }
+
+        return res;
+
+//        return jdbcTemplate.update(sql, contact.getName(), contact.getEmail(), contact.getAddress(), contact.getPhone(),
+//                contact.getId());
     }
 
     @Override

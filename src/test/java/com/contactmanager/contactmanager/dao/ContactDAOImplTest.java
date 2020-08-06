@@ -36,7 +36,7 @@ class ContactDAOImplTest {
 
     @Test
     void update() {
-        Contact contact = new Contact(2,"Ale Miroiu", "ale.miroiu@ucl.uk",
+        Contact contact = new Contact(10,"Ale Miroiu", "ale.miroiu@ucl.uk",
                 "London, UK", "0727835638");
 
         int result = dao.update(contact);
